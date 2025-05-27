@@ -21,6 +21,7 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  const currentYear = new Date().getFullYear()
   return (
     <html lang="en">
       <body>
@@ -37,6 +38,12 @@ export default function RootLayout({ children }) {
               alt="Dirty Birdz Ontario"
             />
             <img src="/assets/img/logoN.png" alt="Kin Canada Georgina" />
+          </div>
+          <div className="footer-links">
+            <p>
+              <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a>
+            </p>
+            <p>© {currentYear} Motor Mania Georgina. All rights reserved.</p>
           </div>
         </footer>
       </body>

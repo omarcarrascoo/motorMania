@@ -3,6 +3,10 @@
   color: #ffffffb1;
  
 }
+html,body{
+   max-width: 100% !important;
+   overflow-x: hidden;
+}
 
 /* style.css */
 
@@ -20,9 +24,10 @@ html {
 scroll-padding-top: 100px;
 }
 body {
-padding-top: 100px;
-font-family: 'Kantumruy Pro', sans-serif;
-color: #000;
+  padding-top: 100px;
+  font-family: 'Kantumruy Pro', sans-serif;
+  color: #000;
+  background: #efefef;
 }
 
 /* ====================
@@ -43,7 +48,7 @@ z-index: 1000;
 
 /* logo sizing */
 .logo img {
-height: 100px;
+height: 90px;
 width: auto;
 }
 
@@ -83,7 +88,7 @@ transition: transform .3s, opacity .3s;
 
 /* scrolled state (if you have JS toggling .scrolled) */
 .navbar.scrolled {
-background: #000000d6;
+background: #000000;
 box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -142,6 +147,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   line-height: 1.2;
   text-transform: uppercase;
   margin-bottom: 20px;
+  font-weight: 900;
 }
 .hero-content p {
   font-size: 20px;
@@ -164,7 +170,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   opacity: .8;
 }
 .hero-image img {
-  max-width: 900px;
+  max-width: 800px;
   width: auto;
 }
 
@@ -174,7 +180,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   .hero {
     flex-direction: column;
     text-align: center;
-    padding: 120px 20px 20px;
+    padding: 60px 20px 20px;
   }
   .hero-content {
     margin-bottom: 30px;
@@ -290,12 +296,12 @@ margin: 0;
 /* About section */
 .about-section {
   padding: 100px 0;
-  background: #fff;
+  background: #242424;
   text-align: center;
 }
 .about-section h2 {
   font-size: 36px;
-  color: #000;
+  color: #ffffff;
   margin-bottom: 50px;
   text-transform: uppercase;
 }
@@ -407,23 +413,7 @@ margin: 0;
   display: block;
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    padding: 120px 20px 20px;
-  }
-  .hero-content {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .nav-links {
-    gap: 15px;
-  }
-  .pager {
-    display: none!important; /* hide pager on smaller screens */
-  }
-}
+
 @media (max-width: 600px) {
   .details-grid, .logo-grid, .desc-grid {
     padding: 0 20px;
@@ -447,6 +437,9 @@ margin: 0;
   padding: 60px 0 20px;
   background: #fff;
   text-align: center;
+}
+.intro-text{
+  padding-top: 50px;
 }
 .gallery-intro .intro-text {
   font-size: 24px;
@@ -599,6 +592,7 @@ width: 100%;
 padding: 100px 20px;
 background: #fff;
 text-align: center;
+min-height: 90vh;
 }
 .celebration-title {
 font-family: 'Kantumruy Pro', sans-serif;
@@ -1000,12 +994,24 @@ padding: 12px 30px;
   gap: 30px;
 }
 }
+
+
+/* FOOTER SECTION */
+
 .site-footer {
-background-color: #bdc4e5;  /* match your purple-blue */
+background-color: #000000;  /* match your purple-blue */
 padding: 1.5rem 0;
 text-align: center;
 }
 
+.footer-links{
+  color: #fff;
+}
+.footer-links p, a{
+  color: #fff;
+  font-weight: 200;
+  margin-bottom: 10;
+}
 .footer-logos {
 display: flex;
 justify-content: space-around;
@@ -1016,14 +1022,14 @@ flex-wrap: wrap;      /* space between logos */
 
 
 .footer-logos img {
-max-height: 60px;
+max-height: 30px;
 height: auto;
 width: auto;
 }
 .dirtyBirdMini{
 max-height: 2000px;
-width: 100px!important;
-min-height: 160px!important;
+width: 80px!important;
+min-height: 140px!important;
 }
 .contact-us {
 display: flex;
@@ -1036,7 +1042,7 @@ background-color: #1B35B2;
 color: #fff;
 justify-content: center;
 gap: 2rem;
-margin-bottom:8px;
+margin-bottom:0px;
 flex-wrap: wrap;
 }
 

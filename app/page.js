@@ -146,7 +146,7 @@ export default function HomePage() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="about-section">
+      <section data-aos="flip-up" data-aos-duration="1200" id="about" className="about-section">
         <h2>TWO ICONS. ONE MISSION.</h2>
         <div className="logo-grid">
           {[
@@ -203,14 +203,19 @@ export default function HomePage() {
       </section>
 
       {/* GALLERY */}
-      <section className="gallery-intro">
+      <section data-aos="flip-up" data-aos-duration="1200" >
+        <div className="gallery-intro">
         <p className="intro-text">
           Motor Mania Georgina is the first-ever collaborative car event between the{' '}
           <span className="highlight">Kinsmen</span> and{' '}
           <span className="highlight">Dirty Birdz</span>.
         </p>
-      </section>
-      <section id="gallery" className="gallery-section">
+      </div>
+      <div 
+        id="gallery" 
+        className="gallery-section"
+        
+      >
         <div className="gallery-container">
           <button
             className="gallery-nav prev"
@@ -232,10 +237,12 @@ export default function HomePage() {
             ›
           </button>
         </div>
+      </div>
       </section>
 
       {/* COMMUNITY CELEBRATION */}
-      <section id="community‐celebration" className="celebration-section">
+      <section id="community‐celebration" className="celebration-section"
+      data-aos="flip-up" data-aos-duration="1200">
         <h2 className="celebration-title">
           THIS ISN’T JUST A CAR SHOW.
           <br />
@@ -249,7 +256,7 @@ export default function HomePage() {
       </section>
 
       {/* YOUR SUPPORT POWERS */}
-      <section id="support-powers" className="support-section">
+      <section id="support-powers" className="support-section" data-aos="flip-up" data-aos-duration="1200">
         <div className="support-inner">
           <h2>YOUR SUPPORT POWERS</h2>
           <ul className="support-list">
@@ -266,7 +273,7 @@ export default function HomePage() {
       </section>
 
       {/* VENDORS */}
-      <section id="vendors" className="vendors-section">
+      <section id="vendors" className="vendors-section" data-aos="flip-up" data-aos-duration="1200">
         <h2>VENDORS</h2>
         <div className="vendors-box">
           <p>– 10’×10’ spaces (with and without power)</p>
@@ -278,7 +285,7 @@ export default function HomePage() {
       </section>
 
       {/* ATTENDEE DEMOGRAPHICS */}
-      <section id="attendee-demographics" className="demographics-section">
+      <section id="attendee-demographics" className="demographics-section" data-aos="flip-up" data-aos-duration="1200">
         <h2>ATTENDEE DEMOGRAPHICS</h2>
         <p className="subtitle">MOTOR MANIA DRAWS IN HIGH-INTENT BUYERS.</p>
         <div className="demo-carousel">
@@ -366,7 +373,7 @@ export default function HomePage() {
       </section>
 
       {/* CONTACT */}
-      <section className="contact-us" id="contact">
+      <section data-aos="flip-up" data-aos-duration="1200" className="contact-us" id="contact">
         <div className="contact-us__heading">
           <span>CONTACT</span>
           <span>US</span>
