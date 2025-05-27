@@ -90,7 +90,7 @@
 
 /* === Modal Styles === */
 .modal {
-  /* display: none; */
+  display: flex; 
   position: fixed;
   inset: 0;
   background-color: rgba(19, 59, 180, 0.95);
@@ -189,6 +189,7 @@
     display: flex;
     flex-wrap: wrap-reverse;
     text-align: center;
+    width: 100%;
   }
   .deadline-text h2 {
     font-size: 28px;
@@ -206,7 +207,11 @@
   padding: 60px 20px;
   background: #E8EAF6;
 }
-
+.contactTitle{
+  color: #1A36B4;
+  font-size: 32px;
+  text-align: center;
+}
 .contact-form {
   max-width: 800px;
   margin: 0 auto;
@@ -341,6 +346,10 @@
     height: 90vh;
     margin-top: 0;
   }
+  .ready-alt {
+      padding: 20px 0px;
+      background: #fff;
+    }
   .ready-alt__container {
     grid-template-columns: 1fr;
   }

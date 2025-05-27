@@ -184,6 +184,7 @@ export default function SponsorshipClient() {
 
       {/* Contact Form */}
       <section id="contact" className="contact-section">
+        <h3 className='contactTitle'>CONTACTACT</h3>
         <form className="contact-form">
           {[
             { id: 'email', label: 'Email', type: 'email' },
