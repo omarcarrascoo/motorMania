@@ -1,0 +1,374 @@
+:root {
+  --brand-blue: #1A36B4;
+  --bg-light: #FEFDF8;
+  --text-black: #000;
+  --text-white: #FFF;
+}
+
+/* --- Sponsorship Packages --- */
+.packages-section {
+  padding: 4rem 2rem;
+  background-color: var(--bg-light);
+  text-align: center;
+  height: 64vh;
+  margin-top: 8vh;
+}
+
+.packages-section h2 {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-black);
+}
+
+.packages-section .subtitle {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: var(--text-black);
+}
+
+.packages-section .highlight {
+  color: var(--brand-blue);
+  font-weight: 700;
+}
+
+.packages-list {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.package-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.package-item .info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.package-item .title {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-black);
+}
+
+.package-item .price {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  color: var(--text-black);
+}
+
+.view-btn {
+  background-color: var(--brand-blue);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1.25rem;
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-white);
+  cursor: pointer;
+}
+
+.separator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-black);
+  opacity: 0.3;
+}
+
+/* === Modal Styles === */
+.modal {
+  /* display: none; */
+  position: fixed;
+  inset: 0;
+  background-color: rgba(19, 59, 180, 0.95);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--brand-blue);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  color: var(--text-white);
+  text-align: center;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-white);
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.modal-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.modal-body ul {
+  list-style: disc inside;
+  margin: 1rem 0;
+}
+
+.modal-footer .modal-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* ===== Important Deadlines ===== */
+.deadlines-section {
+  padding: 100px 20px;
+  background: #fff;
+}
+
+.deadlines-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.deadline-text h2 {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #E02025;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.deadline-text p {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #E02025;
+  margin: 8px 0;
+}
+
+.deadline-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .deadlines-inner {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    text-align: center;
+  }
+  .deadline-text h2 {
+    font-size: 28px;
+  }
+  .deadline-text p {
+    font-size: 18px;
+  }
+  .deadline-image {
+    margin-top: 30px;
+  }
+}
+
+/* ===== Contact Form ===== */
+.contact-section {
+  padding: 60px 20px;
+  background: #E8EAF6;
+}
+
+.contact-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 40px;
+  background: #E8EAF6;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 18px;
+  color: #1A36B4;
+}
+
+.form-group input {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 16px;
+  padding: 8px 12px;
+  border: 2px solid #1A36B4;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.form-actions button {
+  background: #1A36B4;
+  color: #fff;
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.form-actions button:hover {
+  opacity: 0.8;
+}
+
+/* ===== Alternate “Ready to Roll” ===== */
+.ready-alt {
+  padding: 60px 20px;
+  background: #fff;
+}
+
+.ready-alt__container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  max-width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.ready-alt__teal {
+  background: #59B8C4;
+  border-radius: 15px 0 0 15px;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ready-alt__teal h2 {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.ready-alt__white {
+  background: #fff;
+  border: 2px solid #59B8C4;
+  border-radius: 0 15px 15px 0;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ready-alt__white p {
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #000;
+  margin: 16px 0;
+}
+
+.ready-alt__cta {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.ready-alt__button {
+  display: inline-block;
+  background: #59B8C4;
+  color: #fff;
+  font-family: 'Kantumruy Pro', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.ready-alt__button:hover {
+  opacity: 0.8;
+}
+
+/* ===== Responsiveness ===== */
+@media (max-width: 768px) {
+  .packages-section {
+    height: 90vh;
+    margin-top: 0;
+  }
+  .ready-alt__container {
+    grid-template-columns: 1fr;
+  }
+  .ready-alt__teal,
+  .ready-alt__white {
+    border-radius: 15px;
+  }
+  .ready-alt__teal h2 {
+    font-size: 28px;
+  }
+  .ready-alt__white p {
+    font-size: 16px;
+  }
+  .form-group {
+    grid-template-columns: 1fr;
+  }
+  .form-group label {
+    font-size: 16px;
+  }
+  .form-group input {
+    font-size: 14px;
+  }
+  .form-actions {
+    justify-content: center;
+  }
+}
+
+/* smooth scroll for anchors */
+html {
+  scroll-behavior: smooth;
+}
