@@ -176,7 +176,7 @@ export default function HomePage() {
             },
           ].map(({ logo, alt, summary, items }) => (
             <div key={logo} className="sectLogoText">
-              <div className="logo-card">
+              <div className={`logo-card ${logo === "Dirty Birdz Logo.png"?"dirtBird":""}`}>
                 <img src={`/assets/img/${logo}`} alt={alt} />
               </div>
               <div
@@ -355,7 +355,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          <div className="pager">
+          <div className="pager hiddenMobile">
             {[0, 1].map((idx) => (
               <span
                 key={idx}

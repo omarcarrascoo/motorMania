@@ -1,8 +1,8 @@
 
 .highOmar{
   color: #ffffffb1;
- 
 }
+
 html,body{
    max-width: 100% !important;
    overflow-x: hidden;
@@ -339,6 +339,10 @@ margin: 0;
   max-width: 60%;     /* shrink both logos to fit */
   height: auto;
 }
+.dirtBird img{
+  max-width: 40% !important;
+  height: auto;
+}
 
 /* description row */
 .desc-grid {
@@ -624,6 +628,11 @@ max-width: 1000px;
 
 /* Responsive */
 @media (max-width: 768px) {
+
+
+.hiddenMobile{
+  display: none !important;
+}
 .celebration-title {
   font-size: 36px;
 }
