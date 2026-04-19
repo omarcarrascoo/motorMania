@@ -1,407 +1,403 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import { useEffect, useState } from 'react'
+import Nav from './components/Nav'
+import Reveal from './components/Reveal'
+import CountUp from './components/CountUp'
+import MagneticBtn from './components/MagneticBtn'
+
+const ABOUT = [
+  {
+    logo: 'Logo - Georgina_Transparent.png',
+    alt: 'Kinsmen of Georgina',
+    kicker: 'The Community',
+    name: 'Kinsmen of Georgina',
+    copy:
+      'For seventy-five years they’ve been the quiet engine behind Georgina’s parades, fundraisers and festivals — turning up early, staying late, making the town stronger by showing up.',
+    items: [
+      '75+ years of service',
+      '5+ years running the Earl Carpenter Car Show',
+      'Organizers of Georgina’s most cherished events',
+    ],
+  },
+  {
+    logo: 'Dirty Birdz Logo.png',
+    alt: 'Dirty Birdz Car Club',
+    kicker: 'The Culture',
+    name: 'Dirty Birdz Car Club',
+    copy:
+      'Ontario-grown, grease under the fingernails, built in driveways and backyard shops. Dirty Birdz show up with the builds, the people and the energy that turn a parking lot into an event.',
+    items: [
+      'Ontario car community leaders',
+      '5+ years running the Dirty Birdz Car Show',
+      'Champions of build-not-bought culture',
+    ],
+  },
+]
+
+const VISION = [
+  { t: 'Vintages & Classics', s: 'Chrome, patina, provenance.' },
+  { t: 'Custom Builds', s: 'Garage-born, loud on purpose.' },
+  { t: 'Live Music', s: 'All day on the main stage.' },
+  { t: 'Food Trucks', s: 'Street eats, cold drinks, shade.' },
+  { t: 'Craft Vendors', s: 'Local makers and merch.' },
+  { t: 'Trophies', s: 'Classics, Muscle, People’s Choice.' },
+]
+
+const MOSAIC = [
+  { n: 1, tile: 'm-a', cap: 'Opening hour · 2025' },
+  { n: 3, tile: 'm-b', cap: 'Muscle row' },
+  { n: 5, tile: 'm-c', cap: 'Family day' },
+  { n: 7, tile: 'm-d', cap: 'Sun-soaked chrome' },
+  { n: 9, tile: 'm-e', cap: 'Kin Hall · vendors' },
+  { n: 11, tile: 'm-f', cap: 'Build-not-bought' },
+  { n: 13, tile: 'm-g', cap: 'Golden hour' },
+]
 
 export default function HomePage() {
-  // hamburger nav
-  const [navOpen, setNavOpen] = useState(false)
+  const [countdown, setCountdown] = useState({ d: 0, h: 0, m: 0, s: 0 })
+
   useEffect(() => {
-    const onScroll = () => {
-      document
-        .querySelector('.navbar')
-        ?.classList.toggle('scrolled', window.scrollY > 50)
+    const target = new Date('2026-09-05T10:00:00-04:00').getTime()
+    const tick = () => {
+      const diff = Math.max(0, target - Date.now())
+      setCountdown({
+        d: Math.floor(diff / 86400000),
+        h: Math.floor((diff / 3600000) % 24),
+        m: Math.floor((diff / 60000) % 60),
+        s: Math.floor((diff / 1000) % 60),
+      })
     }
-    window.addEventListener('scroll', onScroll)
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
+    tick()
+    const id = setInterval(tick, 1000)
+    return () => clearInterval(id)
   }, [])
 
-  // init AOS
-  useEffect(() => {
-    AOS.init({ once: true })
-  }, [])
-
-  // gallery carousel
-  const trackRef = useRef(null)
-  const [galleryIndex, setGalleryIndex] = useState(0)
-  const totalImages = 13
-  useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-    const item = track.children[0]
-    const style = getComputedStyle(item)
-    const itemW =
-      item.getBoundingClientRect().width +
-      parseFloat(style.marginLeft) +
-      parseFloat(style.marginRight)
-    const offset =
-      galleryIndex * itemW - (track.parentElement.clientWidth - itemW) / 6
-    track.style.transform = `translateX(${-offset}px)`
-  }, [galleryIndex])
-
-  // demographics pager
-  const [demoIdx, setDemoIdx] = useState(0)
+  const pad = (n) => String(n).padStart(2, '0')
 
   return (
     <>
-      <header className="navbar">
-        <div className="logo">
-          <a href="/">
-            <img src="/assets/img/logoN.png" alt="Motor Mania Georgina Logo" />
-          </a>
-        </div>
-        <div
-          className={`hamburger ${navOpen ? 'open' : ''}`}
-          onClick={() => {
-            setNavOpen(!navOpen)
-            document.querySelector('.nav-links')?.classList.toggle('open')
-          }}
-        >
-          <span />
-          <span />
-          <span />
-        </div>
-        <nav>
-          <ul className="nav-links">
-            {[
-              { href: '/', text: 'Home' },
-              { href: '#event-info', text: 'Event Info' },
-              { href: '#about', text: 'About' },
-              { href: '#support-powers-top', text: 'Get Involved' },
-              { href: '/sponsorship', text: 'Sponsorship' },
-              { href: '#contact', text: 'Contact' },
-            ].map(({ href, text }) => (
-              <li key={href}>
-                <a href={href}>{text}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
+      <Nav />
 
-      {/* HERO */}
-      <section className="hero">
+      {/* ============= HERO — billboard ============= */}
+      <section className="hero-billboard">
         <div
-          className="hero-content"
-          data-aos="fade-right"
-          data-aos-easing="linear"
-          data-aos-duration="1500"
-        >
-          <h1>A one-day, horsepower-fueled community celebration like no other</h1>
-          <p>Presented by Kinsmen of Georgina & Dirty Birdz Car Club</p>
-          <a className="btn sponsor-btn" href="/sponsorship">
-            Become a Sponsor
-          </a>
-        </div>
-        <div
-          className="hero-image"
-          data-aos="fade-left"
-          data-aos-easing="linear"
-          data-aos-duration="1500"
-        >
-          <img src="/assets/img/carnuebo.png" alt="Hot Rod Car" />
-        </div>
-      </section>
+          className="hero-billboard__bg"
+          style={{ backgroundImage: "url('/assets/img/1.jpg')" }}
+        />
+        <div className="hero-billboard__scrim" />
 
-      {/* EVENT DETAILS */}
-      <section id="event-info" className="event-details">
-        <div className="container">
-          <h2>
-            EVENT DETAILS
-            <span className="fee">ENTRANCE FEE $10</span>
-          </h2>
-          <div className="details-grid">
-            {[
-              {
-                img: 'calendario.png',
-                alt: 'Calendar icon',
-                text: 'Saturday, September 6, 2025 10 AM to 3 PM',
-              },
-              {
-                img: 'ubi.png',
-                alt: 'Location icon',
-                text: 'Sutton Fairgrounds, Sutton, Ontario',
-              },
-              {
-                img: 'file.png',
-                alt: 'Information icon',
-                text:
-                  'With over 1 M square feet of space including Curling Club, Kin Hall, and outdoor pavilions, there’s room for action and future growth.',
-              },
-            ].map(({ img, alt, text }) => (
-              <div
-                key={img}
-                className="detail-card"
-                data-aos="flip-down"
-                data-aos-duration="800"
-              >
-                <img src={`/assets/img/${img}`} alt={alt} />
-                <p>{text}</p>
-              </div>
-            ))}
+        <div className="hero-billboard__top">
+          <span>Motor Mania Georgina</span>
+          <span className="dot" />
+          <span>2026 Edition</span>
+          <span className="dot" />
+          <span>Sutton Fairgrounds · ON</span>
+        </div>
+
+        <div className="hero-billboard__stack">
+          <h1>
+            <span>Motor</span>
+            <span>Mania</span>
+            <span className="year">2026</span>
+          </h1>
+        </div>
+
+        <div className="hero-billboard__foot">
+          <div className="hero-billboard__lead">
+            <span className="kicker"><em /> Saturday · September 5 · 2026</span>
+            <p>
+              Four hundred engines warming up. A million square feet of fairground.
+              One loud, sun-soaked day where Georgina turns into the biggest car
+              meet in Ontario.
+            </p>
+          </div>
+          <div className="hero-billboard__ctas">
+            <MagneticBtn href="/sponsorship" variant="primary">
+              Partner With Us <span className="arrow">→</span>
+            </MagneticBtn>
+            <MagneticBtn href="#what" variant="ghost">
+              What to Expect <span className="arrow">↓</span>
+            </MagneticBtn>
           </div>
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section data-aos="flip-up" data-aos-duration="1200" id="about" className="about-section">
-        <h2>TWO ICONS. ONE MISSION.</h2>
-        <div className="logo-grid">
-          {[
-            {
-              logo: 'Logo - Georgina_Transparent.png',
-              alt: 'Kin Canada logo',
-              summary:
-                'A pillar of the community. For decades, the Kinsmen have organized parades…',
-              items: [
-                '75+ years of community service',
-                '5+ years running the Earl Carpenter Car Show at The Sutton Fair Grounds',
-                'Organizers of Georgina’s most cherished events',
-                'Driven by passion and local enthusiasm',
-              ],
-            },
-            {
-              logo: 'Dirty Birdz Logo.png',
-              alt: 'Dirty Birdz logo',
-              summary:
-                'An Ontario-grown car crew rooted in custom culture. Known for unforgettable meets…',
-              items: [
-                'Active car community leaders in Ontario',
-                '5+ running the Dirty Birdz Car Show at Hidden Stone Farms',
-                'Hosts of high-energy shows and creative rallies',
-                'Champions of build-not-bought mentality',
-              ],
-            },
-          ].map(({ logo, alt, summary, items }) => (
-            <div key={logo} className="sectLogoText">
-              <div className={`logo-card ${logo === "Dirty Birdz Logo.png"?"dirtBird":""}`}>
-                <img src={`/assets/img/${logo}`} alt={alt} />
+      {/* ============= TICKER ============= */}
+      <section className="ticker">
+        <div className="ticker__track">
+          {[0, 1].map((k) => (
+            <div className="ticker__group" key={k}>
+              <span>Sept 5 · 2026</span>
+              <span className="tdot" />
+              <span className="outline">Kinsmen × Dirty Birdz</span>
+              <span className="tdot" />
+              <span>400–500 Vehicles</span>
+              <span className="tdot" />
+              <span className="outline">Sutton Fairgrounds</span>
+              <span className="tdot" />
+              <span>Horsepower · Heritage · Heart</span>
+              <span className="tdot" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ============= STATEMENT + COUNTDOWN ============= */}
+      <section id="what" className="statement">
+        <div className="container statement__inner">
+          <Reveal variant="up">
+            <p className="kicker"><em /> Coming Soon</p>
+          </Reveal>
+          <Reveal variant="up" delay={80}>
+            <h2 className="statement__title">
+              One day. One town. <span className="outline">Every kind</span> of
+              horsepower imaginable.
+            </h2>
+          </Reveal>
+          <Reveal variant="up" delay={160}>
+            <p className="statement__copy">
+              Motor Mania Georgina is a one-day, horsepower-fueled community
+              celebration like no other. After an inaugural run that pulled
+              400–500 vehicles and filled the grounds, we’re coming back bigger —
+              louder stage, more builds, more vendors, same family-first energy.
+            </p>
+          </Reveal>
+
+          <Reveal variant="scale" delay={240} className="countdown-band reveal-stagger" stagger={120}>
+            {[
+              { k: 'Days', v: pad(countdown.d) },
+              { k: 'Hours', v: pad(countdown.h) },
+              { k: 'Minutes', v: pad(countdown.m) },
+              { k: 'Seconds', v: pad(countdown.s) },
+            ].map(({ k, v }) => (
+              <div key={k}>
+                <div className="v">{v}</div>
+                <div className="k">{k}</div>
               </div>
-              <div
-                className="desc-card"
-                onClick={(e) => e.currentTarget.classList.toggle('expanded')}
-              >
-                <p className="summary-text">
-                  {summary}
-                  <span className="toggle-arrow" />
-                </p>
-                <ul className="more-info">
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============= EVENT DETAILS — image side ============= */}
+      <section id="event-info" className="event-strip">
+        <Reveal variant="left" className="event-strip__media">
+          <div
+            className="event-strip__img"
+            style={{ backgroundImage: "url('/assets/img/5.jpg')" }}
+          />
+          <div className="event-strip__badge">
+            <span className="label">Entrance</span>
+            <span className="amt">$10</span>
+          </div>
+        </Reveal>
+        <div className="event-strip__copy">
+          <Reveal variant="up"><p className="kicker"><em /> Logistics</p></Reveal>
+          <Reveal variant="up" delay={80}>
+            <h2>
+              Saturday, <br />
+              <span className="outline">September 5.</span> <br />
+              10 AM — 3 PM.
+            </h2>
+          </Reveal>
+          <Reveal variant="up" delay={160} className="event-strip__meta reveal-stagger" stagger={100}>
+            <div>
+              <div className="k">Location</div>
+              <div className="v">Sutton Fairgrounds, Sutton, Ontario</div>
+            </div>
+            <div>
+              <div className="k">Grounds</div>
+              <div className="v">1M+ sq ft · Curling Club · Kin Hall · 2 outdoor pavilions</div>
+            </div>
+            <div>
+              <div className="k">Draw</div>
+              <div className="v">400–500 vehicles · families, collectors, vendors</div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============= TWO ICONS ============= */}
+      <section id="about" className="icons-section">
+        <div className="container">
+          <Reveal variant="up"><p className="kicker"><em /> Who&apos;s Behind It</p></Reveal>
+          <Reveal variant="up" delay={80}>
+            <h2 className="big-title">
+              Two crews. <span className="outline">One mission.</span>
+            </h2>
+          </Reveal>
+          <Reveal variant="up" delay={160}>
+            <p className="big-lead">
+              A service club that’s been in Georgina since before your grandpa had
+              a hot rod. A car club that builds cars the way they’re meant to be
+              built. Together — something neither could pull off alone.
+            </p>
+          </Reveal>
+          <Reveal variant="up" delay={220} className="icons-grid reveal-stagger" stagger={140}>
+            {ABOUT.map(({ logo, alt, kicker, name, copy, items }) => (
+              <article key={name} className="icons-card">
+                <div className="icons-card__head">
+                  <div className="icons-card__logo">
+                    <img src={`/assets/img/${logo}`} alt={alt} />
+                  </div>
+                  <div>
+                    <span className="icons-card__kicker">{kicker}</span>
+                    <h3>{name}</h3>
+                  </div>
+                </div>
+                <p>{copy}</p>
+                <ul>
                   {items.map((li) => (
                     <li key={li}>{li}</li>
                   ))}
                 </ul>
-                <div className="pager">
-                  <span className="dot" />
-                  <span className="dot" />
-                </div>
+              </article>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============= WHAT TO EXPECT — over photo ============= */}
+      <section className="expect">
+        <div
+          className="expect__bg"
+          style={{ backgroundImage: "url('/assets/img/7.jpg')" }}
+        />
+        <div className="expect__scrim" />
+        <div className="container expect__inner">
+          <Reveal variant="up"><p className="kicker"><em /> The Vision · 2026</p></Reveal>
+          <Reveal variant="up" delay={80}>
+            <h2>
+              What you’ll see <br />
+              <span className="outline">when the gates open.</span>
+            </h2>
+          </Reveal>
+          <Reveal variant="up" delay={160} className="expect__grid reveal-stagger" stagger={80}>
+            {VISION.map(({ t, s }, i) => (
+              <div key={t} className="expect__cell">
+                <span className="n">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{t}</h3>
+                <p>{s}</p>
               </div>
-            </div>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============= GALLERY MOSAIC ============= */}
+      <section className="mosaic">
+        <div className="container">
+          <div className="mosaic__head">
+            <Reveal variant="up">
+              <div>
+                <p className="kicker"><em /> 2025 · On The Grounds</p>
+                <h2 className="big-title">
+                  A look at <span className="outline">last year.</span>
+                </h2>
+              </div>
+            </Reveal>
+            <Reveal variant="right" delay={120}>
+              <MagneticBtn href="/2025" variant="ghost dark">
+                Full recap <span className="arrow">→</span>
+              </MagneticBtn>
+            </Reveal>
+          </div>
+        </div>
+        <Reveal variant="fade" className="mosaic__grid reveal-stagger" stagger={90}>
+          {MOSAIC.map(({ n, tile, cap }) => (
+            <figure key={n} className={`mosaic__tile ${tile}`} data-caption={cap}>
+              <img src={`/assets/img/${n}.jpg`} alt={cap} />
+            </figure>
           ))}
+        </Reveal>
+      </section>
+
+      {/* ============= MANIFESTO over photo ============= */}
+      <section className="manifesto-photo">
+        <div
+          className="manifesto-photo__bg"
+          style={{ backgroundImage: "url('/assets/img/10.jpg')" }}
+        />
+        <div className="manifesto-photo__scrim" />
+        <div className="container manifesto-photo__inner">
+          <Reveal variant="mask">
+            <h2>
+              This isn’t just a car show. <br />
+              <span className="outline">It’s a community-powered,</span> <br />
+              turbo-charged celebration.
+            </h2>
+          </Reveal>
+          <Reveal variant="up" delay={200}>
+            <p>
+              Car lovers, families, collectors, artists, local vendors and
+              sponsors — all fueling a cultural moment built around horsepower,
+              heritage and heart.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* GALLERY */}
-      <section data-aos="flip-up" data-aos-duration="1200" >
-        <div className="gallery-intro">
-        <p className="intro-text">
-          Motor Mania Georgina is the first-ever collaborative car event between the{' '}
-          <span className="highlight">Kinsmen</span> and{' '}
-          <span className="highlight">Dirty Birdz</span>.
-        </p>
-      </div>
-      <div 
-        id="gallery" 
-        className="gallery-section"
-        
-      >
-        <div className="gallery-container">
-          <button
-            className="gallery-nav prev"
-            onClick={() => setGalleryIndex((i) => Math.max(i - 1, 0))}
-          >
-            ‹
-          </button>
-          <div className="gallery-track" ref={trackRef}>
-            {Array.from({ length: totalImages }).map((_, i) => (
-              <div key={i} className="gallery-item">
-                <img src={`/assets/img/${i + 1}.jpg`} alt={`Event photo ${i + 1}`} />
-              </div>
-            ))}
+      {/* ============= STATS TEASER ============= */}
+      <section className="stats-band">
+        <div className="container">
+          <Reveal variant="up"><p className="kicker"><em /> Why Sponsors Show Up</p></Reveal>
+          <Reveal variant="up" delay={80}>
+            <h2 className="big-title">
+              Real buyers. <span className="outline">Real spend.</span>
+            </h2>
+          </Reveal>
+        </div>
+        <Reveal variant="up" delay={160} className="stats-band__grid reveal-stagger" stagger={120}>
+          <div className="stats-band__cell">
+            <div className="v"><CountUp value={66} suffix="%" /></div>
+            <div className="d">Bought from an exhibitor or sponsor on-site.</div>
           </div>
-          <button
-            className="gallery-nav next"
-            onClick={() => setGalleryIndex((i) => Math.min(i + 1, totalImages - 1))}
-          >
-            ›
-          </button>
-        </div>
-      </div>
-      </section>
-
-      {/* COMMUNITY CELEBRATION */}
-      <section id="community‐celebration" className="celebration-section"
-      data-aos="flip-up" data-aos-duration="1200">
-        <h2 className="celebration-title">
-          THIS ISN’T JUST A CAR SHOW.
-          <br />
-          IT’S A COMMUNITY-POWERED, TURBO-CHARGED CELEBRATION.
-        </h2>
-        <p className="celebration-title2">UNITING:</p>
-        <p className="celebration-list">
-          CAR LOVERS – FAMILIES – COLLECTORS – LOCAL VENDORS & SPONSORS – ARTISTS
-        </p>
-        <div id="support-powers-top" />
-      </section>
-
-      {/* YOUR SUPPORT POWERS */}
-      <section id="support-powers" className="support-section" data-aos="flip-up" data-aos-duration="1200">
-        <div className="support-inner">
-          <h2>YOUR SUPPORT POWERS</h2>
-          <ul className="support-list">
-            {[
-              'EVENT SETUP',
-              'STAGE, SOUND AND ENTERTAINMENT',
-              'MARKETING AND GIVEAWAYS',
-              'VENDOR LOGISTICS AND SAFETY',
-            ].map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* VENDORS */}
-      <section id="vendors" className="vendors-section" data-aos="flip-up" data-aos-duration="1200">
-        <h2>VENDORS</h2>
-        <div className="vendors-box">
-          <p>– 10’×10’ spaces (with and without power)</p>
-          <p>– Indoor $170</p>
-          <p>– Outdoor $120</p>
-          <p>– Sponsors get 50% off vendor spaces</p>
-        </div>
-        <a href="#contact">Contact Us</a>
-      </section>
-
-      {/* ATTENDEE DEMOGRAPHICS */}
-      <section id="attendee-demographics" className="demographics-section" data-aos="flip-up" data-aos-duration="1200">
-        <h2>ATTENDEE DEMOGRAPHICS</h2>
-        <p className="subtitle">MOTOR MANIA DRAWS IN HIGH-INTENT BUYERS.</p>
-        <div className="demo-carousel">
-          <div className="slides" style={{ transform: `translateX(-${demoIdx * 50}%)` }}>
-            {/* Slide #1 */}
-            <div className="slide">
-              <h3>WHO’S COMING?</h3>
-              <p className="lead">
-                MOTOR MANIA ATTRACTS A WIDE RANGE OF CAR LOVERS — FROM CLASSIC COLLECTORS TO
-                CURIOUS FAMILIES.
-              </p>
-              <div className="row">
-                <div className="col">
-                  <h4>HOW FAR ARE THEY COMING FROM?</h4>
-                  <p>
-                    WITHIN 50 KM: 32%<br />
-                    50–100 KM: 32%<br />
-                    100–200 KM: 22%<br />
-                    OVER 200 KM: 14%
-                  </p>
-                  <h4>GROUPS</h4>
-                  <p>
-                    71% ARRIVE WITH 3 OR MORE PEOPLE<br />
-                    27% AS COUPLES OR SOLO
-                  </p>
-                </div>
-                <div className="col">
-                  <h4>GENDER</h4>
-                  <p>80% MALE ATTENDEES<br />MANY WITH FAMILIES</p>
-                  <h4>AGE BREAKDOWN</h4>
-                  <p>
-                    UNDER 25: 20%<br />
-                    25–34: 19%<br />
-                    35–44: 14%<br />
-                    45–54: 23%<br />
-                    55–64: 17%<br />
-                    65 AND OLDER: 7%
-                  </p>
-                </div>
-              </div>
-            </div>
-            {/* Slide #2 */}
-            <div className="slide">
-              <h3>WHAT DO THEY DRIVE?</h3>
-              <p className="lead">MANY ATTENDEES OWN MORE THAN ONE TYPE OF VEHICLE.</p>
-              <div className="row">
-                <div className="col">
-                  <p>
-                    CLASSIC/COLLECTOR CARS: 59%<br />
-                    PICKUP TRUCKS: 38%<br />
-                    TUNERS/MODIFIED: 18%<br />
-                    RACING VEHICLES: 18%<br />
-                    EXOTICS: 3%
-                  </p>
-                </div>
-                <div className="col">
-                  <h4>INCOME BRACKETS</h4>
-                  <p>
-                    $50K–$80K: 15%<br />
-                    $80K–$100K: 17%<br />
-                    $100K–$150K: 17%<br />
-                    $150K+: 15%
-                  </p>
-                  <h4>BUYING BEHAVIOUR</h4>
-                  <p>66% BOUGHT SOMETHING AT THE SHOW!</p>
-                </div>
-              </div>
-            </div>
+          <div className="stats-band__cell">
+            <div className="v"><CountUp value={71} suffix="%" /></div>
+            <div className="d">Arrive in groups of 1–3 — couples, crews, families.</div>
           </div>
-          <div className="pager hiddenMobile">
-            {[0, 1].map((idx) => (
-              <span
-                key={idx}
-                className={`dot ${demoIdx === idx ? 'active' : ''}`}
-                onClick={() => setDemoIdx(idx)}
-              />
-            ))}
+          <div className="stats-band__cell">
+            <div className="v">400–500</div>
+            <div className="d">Vehicles rolled through in 2025. Growing in 2026.</div>
           </div>
-        </div>
-        <div className="carousel-cta">
-          <a className="btn sponsor-btn" href="/sponsorship">
-            VIEW SPONSORSHIP PACKAGES
-          </a>
+          <div className="stats-band__cell">
+            <div className="v">1M+</div>
+            <div className="d">Sq ft of fairground taken over for one day.</div>
+          </div>
+        </Reveal>
+        <div className="container stats-band__foot">
+          <Reveal variant="up">
+            <p>
+              Full demographics — age, income, geography, vehicle ownership —
+              inside the 2026 sponsor pitch.
+            </p>
+          </Reveal>
+          <Reveal variant="up" delay={100}>
+            <MagneticBtn href="/sponsorship">
+              See The Pitch <span className="arrow">→</span>
+            </MagneticBtn>
+          </Reveal>
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section data-aos="flip-up" data-aos-duration="1200" className="contact-us" id="contact">
-        <div className="contact-us__heading">
-          <span>CONTACT</span>
-          <span>US</span>
-        </div>
-        <div className="contact-us__details">
-          {[
-            {
-              name: 'COURTNEY RENNIE',
-              role: 'KINSMEN COMMITTEE CHAIR',
-              phone: '905-955-5200',
-              email: 'courtscustomcontracting@gmail.com',
-            },
-            {
-              name: 'JEREMY RANGE',
-              role: 'KINSMEN SECRETARY',
-              phone: null,
-              email: 'kinsmengeorgina@gmail.com',
-            },
-          ].map(({ name, role, phone, email }) => (
-            <div key={name} className="person">
-              <h3>{name}</h3>
-              <p>{role}</p>
-              {phone && <p>{phone}</p>}
-              <p>
-                <a href={`mailto:${email}`}>{email}</a>
-              </p>
-            </div>
-          ))}
+      {/* ============= CTA BAND ============= */}
+      <section className="cta-band">
+        <div className="container cta-band__inner">
+          <Reveal variant="mask">
+            <h2>
+              Let’s build <br />
+              something <span className="outline">loud.</span>
+            </h2>
+          </Reveal>
+          <Reveal variant="up" delay={160} className="cta-band__actions reveal-stagger" stagger={120}>
+            <MagneticBtn href="/sponsorship#contact" variant="primary">
+              Partner With Us <span className="arrow">→</span>
+            </MagneticBtn>
+            <MagneticBtn href="/2025">
+              Relive 2025 <span className="arrow">→</span>
+            </MagneticBtn>
+          </Reveal>
         </div>
       </section>
     </>
